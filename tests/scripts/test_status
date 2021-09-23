@@ -7,7 +7,7 @@
 # Running this script will either produce a 503 error if the delphi_rest_api process is unreachable,
 # or something along the lines of "The Delphi REST API is running." if the process can be reached.
 
-printf "Testing the status of the Delphi REST API:\n"
+printf "Testing Delphi REST API status:\n"
 
 reply=$(curl -u me:ivilab4fun -s "http://ivilab.org/delphi-api/status")
 
