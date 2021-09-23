@@ -1,6 +1,7 @@
 #include "AnalysisGraph.hpp"
 #include "DatabaseHelper.hpp"
 #include <assert.h>
+#include <ctime>
 #include <boost/graph/graph_traits.hpp>
 #include <boost/uuid/uuid.hpp>            // uuid class
 #include <boost/uuid/uuid_generators.hpp> // generators
@@ -253,11 +254,10 @@ int main(int argc, const char* argv[]) {
     served::multiplexer mux;
 
     /* Allow users to check if the REST API is running */
-    mux.handle("/ping")
+    mux.handle("/status")
         .get([&sqlite3DB](served::response& res, const served::request& req) {
-        cout << "/delphi/ping" << endl;
 
-	res << "hi there";
+	res << "The Delphi REST API is running!";
 
 
     });
