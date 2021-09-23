@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Author: Joseph Astier
+
+# Test the 'creat_model' method of the delphi_rest_api 
+#
+
+printf "Testing Delphi REST API create_model:\n"
+
+reply=$(curl -u me:ivilab4fun -s "http://ivilab.org/delphi-api/status")
+
+echo $reply
+

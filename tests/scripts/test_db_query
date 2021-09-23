@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Author: Joseph Astier
+
+# Test our ability to query the existing database on the delphi_rest_api process.
+
+printf "Testing Delphi REST API database query:\n"
+
+reply=$(curl -u me:ivilab4fun -s "http://ivilab.org/delphi-api/status")
+
+echo $reply
+
