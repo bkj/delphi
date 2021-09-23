@@ -252,18 +252,26 @@ int main(int argc, const char* argv[]) {
 
     served::multiplexer mux;
 
+    /* Allow users to check if the REST API is running */
+    mux.handle("/ping")
+        .get([&sqlite3DB](served::response& res, const served::request& req) {
+        cout << "/delphi/ping" << endl;
+
+	res << "hi there";
+
+
+    });
+
 
     /* Test the served response timing */
-    mux.handle("/database/profiler")
+    mux.handle("/delphi/database/profiler")
         .post([&sqlite3DB](served::response& res, const served::request& req) {
+        cout << "/delphi/database/profiler" << endl;
 
         Profiler* profiler = new Profiler();
         profiler->test();  // validate instantiation
 
-	cout << "delphi_rest_api.database.profiler\n";
-
         json ret_exp;
-        ret_exp["experimentId"] ="db_query=profile";
 
 	delete profiler;
 
@@ -369,6 +377,7 @@ int main(int argc, const char* argv[]) {
     */
     mux.handle("/delphi/models/{modelID}")
         .get([&sqlite3DB](served::response& res, const served::request& req) {
+            cout << "/delphi/models/{modelID}" << endl;
             string modelID = req.params["modelID"];
             json query_result = sqlite3DB->select_delphimodel_row(modelID);
 
@@ -378,6 +387,7 @@ int main(int argc, const char* argv[]) {
                 res << ret_exp.dump();
                 return;
             }
+
 
             string model = query_result["model"];
 
@@ -412,10 +422,8 @@ int main(int argc, const char* argv[]) {
              some kind of heuristic, based on the number of nodes and edges. -
              Adarsh
             */
-//            size_t kde_kernels = 1000;
-            size_t kde_kernels = 100;  // TODO remove before flight
-//            int sampling_resolution = 1000, burn = 10000;
-            int sampling_resolution = 100, burn = 1000;  // TODO remove before flight
+            size_t kde_kernels = 1000;
+            int sampling_resolution = 1000, burn = 10000;
             if (getenv("CI")) {
                 // When running in a continuous integration run, we set the
                 // sampling resolution to be small to prevent timeouts.
