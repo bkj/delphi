@@ -246,20 +246,24 @@ class Experiment {
 };
 
 int main(int argc, const char* argv[]) {
-    cout << "delphi_rest_api.main" << endl;
+    cout << "Delphi REST API running!" << endl;
 
     Database* sqlite3DB = new Database();
     Experiment* experiment = new Experiment();
 
     served::multiplexer mux;
 
+
+    /* what's the time? */
+    time_t startTime = time(0);
+    char* startTimeStr = ctime(&startTime);
+    cout << "Start time (MST): " << startTimeStr;
+
     /* Allow users to check if the REST API is running */
     mux.handle("/status")
         .get([&sqlite3DB](served::response& res, const served::request& req) {
 
-	res << "The Delphi REST API is running!";
-
-
+	res << "The Delphi REST API is running.";
     });
 
 
