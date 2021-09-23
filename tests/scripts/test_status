@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Author: Joseph Astier
+
+# Test if there is a delphi_rest_api process running on gauss lstening on port 8123
+#
+# Running this script will either produce a 503 error if the delphi_rest_api process is unreachable,
+# or something along the lines of "The Delphi REST API is running." if the process can be reached.
+
+printf "Testing the status of the Delphi REST API:\n"
+
+reply=$(curl -u me:ivilab4fun -s "http://ivilab.org/delphi-api/status")
+
+echo $reply
+
