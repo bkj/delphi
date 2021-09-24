@@ -444,11 +444,6 @@ int main(int argc, const char* argv[]) {
                 burn = 100;
             }
 
-            // ------------------
-	    // burn = 100;
-	    burn = 10;  // TODO remove before flight
-            // ------------------
-
             AnalysisGraph G;
             G.set_res(kde_kernels);
             G.from_causemos_json_dict(json_data, 0, 0);
