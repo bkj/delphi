@@ -262,6 +262,7 @@ int main(int argc, const char* argv[]) {
     /* Allow users to check if the REST API is running */
     mux.handle("/status")
         .get([&sqlite3DB](served::response& res, const served::request& req) {
+        cout << "/status" << endl; 
 
 	res << "The Delphi REST API is running.";
     });
@@ -414,9 +415,11 @@ int main(int argc, const char* argv[]) {
     mux.handle("/delphi/create-model")
         .post([&sqlite3DB](served::response& response,
                            const served::request& req) {
+
+            cout << "/delphi/create-model" << endl;
+
             nlohmann::json json_data = nlohmann::json::parse(req.body());
 
-	    cout << "delphi_rest_api.main./delphi/create-model\n";
 
             /*
              If neither "CI" or "DELPHI_N_SAMPLES" is set, we default to a
