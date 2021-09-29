@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Author: Joseph Astier
+
+# Query a model status from the delphi REST API
+#
+
+modelId=$1
+
+target="/delphi/models/$modelId"
+
+header="Content-Type: application/json"
+
+remoteUrl="http://ivilab.org/delphi-api"
+localUrl="http://localhost:8123"
+url=$remoteUrl
+
+
+call="curl -u me:ivilab4fun -s $url$target"
+response=$($call)
+
+printf "CALL:     $call\n"
+printf "RESPONSE: $response\n"
+
